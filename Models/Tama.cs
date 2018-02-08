@@ -61,7 +61,7 @@ namespace Tama.Models
             _rest = newRest;
         }
 
-        public int GetID()
+        public int GetId()
         {
             return _id;
         }
@@ -87,7 +87,7 @@ namespace Tama.Models
         {
             foreach (Tamagotchi tama in _instances)
             {
-                if(tama.GetID() == id)
+                if(tama.GetId() == id)
                 {
                     return tama;
                 }

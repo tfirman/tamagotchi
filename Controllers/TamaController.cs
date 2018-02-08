@@ -9,9 +9,8 @@ namespace Tama.Controllers
         [HttpGet("/tamagotchi")]
         public ActionResult Index()
         {
-            // List<Tamagotchi> allTama = Tamagotchi.GetAll();
-            // return View(allTama);
-            return View();
+            List<Tamagotchi> allTama = Tamagotchi.GetAll();
+            return View(allTama);
         }
 
         [HttpGet("/tamagotchi/new")]
@@ -32,15 +31,14 @@ namespace Tama.Controllers
 
             Tamagotchi newTamagotchi = new Tamagotchi(Request.Form["new-tamagotchi"], food, attention, rest);
             List<Tamagotchi> allTama = Tamagotchi.GetAll();
-            // return View("Index", allTama);
-            return View("Index");
+            return View("Index", allTama);
             }
 
         [HttpGet("/tamagotchi/{id}")]
         public ActionResult Details(int id)
         {
             Tamagotchi tama = Tamagotchi.GetById(id);
-            return View("Detail",tama);
+            return View(tama);
         }
 
     }

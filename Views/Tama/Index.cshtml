@@ -1,9 +1,8 @@
-<p>test</p>
-        @* <a href="/new"><button type="button" name="button">Add a Tamagotchi</button></a>
-        <ul>
-            @using Tama.Models;
-            @foreach (Tamagotchi tama in Model)
-            {
-                <li><a href='/tamagotchi/@tama.GetId()'>@tama.GetName()</a></li>
-            }
-        </ul> *@
+<a href="/tamagotchi/new"><button type="button" name="button">Add a Tamagotchi</button></a>
+<ul>
+    @using Tama.Models;
+    @foreach (var tamagotchi in Model)
+    {
+        <li><a href='/tamagotchi/@tamagotchi.GetId()'>@tamagotchi.GetName()</a></li>
+    }
+</ul>
