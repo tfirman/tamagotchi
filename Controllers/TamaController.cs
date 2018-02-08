@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Tama.Models;
+using System;
 
 namespace Tama.Controllers
 {
@@ -41,5 +42,37 @@ namespace Tama.Controllers
             return View(tama);
         }
 
+        [HttpGet("/tamagotchi/time")]
+        public ActionResult Time()
+        {
+            Tamagotchi.TimePass();
+            List<Tamagotchi> allTama = Tamagotchi.GetAll();
+            return View("Index", allTama);
+        }
+
+        [HttpGet("/tamagotchi/{id}/play")]
+        public ActionResult Play(int id)
+        {
+            Tamagotchi tama = Tamagotchi.GetById(id);
+            Console.Write('1');
+            tama.PlayTama();
+            return View("Details", tama);
+        }
+
+        [HttpGet("/tamagotchi/feed")]
+        public ActionResult Feed()
+        {
+            Tamagotchi.FeedTama();
+            List<Tamagotchi> allTama = Tamagotchi.GetAll();
+            return View("Index", allTama);
+
+        }
+        [HttpGet("/tamagotchi/nap")]
+        public ActionResult Nap()
+        {
+            Tamagotchi.TamaRest();
+            List<Tamagotchi> allTama = Tamagotchi.GetAll();
+            return View("Index", allTama);
+        }
     }
 }

@@ -1,8 +1,17 @@
 <a href="/tamagotchi/new"><button type="button" name="button">Add a Tamagotchi</button></a>
 <ul>
     @using Tama.Models;
-    @foreach (var tamagotchi in Model)
+    @foreach (var tama in Model)
     {
-        <li><a href='/tamagotchi/@tamagotchi.GetId()'>@tamagotchi.GetName()</a></li>
+        @if(tama.GetAlive())
+        {
+          <li><a href='/tamagotchi/@tama.GetId()'>@tama.GetName()</a>- Food: @tama.GetFood(), Attention: @tama.GetAttention(), Rest: @tama.GetRest()</li>
+        } else {
+          <li><a href='/tamagotchi/@tama.GetId()'>@tama.GetName()</a> is dead!</li>
+        }
     }
 </ul>
+
+<a href="/tamagotchi/time"><button type="button" name="button2">Time passes...</button></a>
+<a href="/tamagotchi/feed"><button type="button" name="button3">Feed them!</button></a>
+<a href="/tamagotchi/nap"><button type="button" name="button4">Nap Time!</button></a>

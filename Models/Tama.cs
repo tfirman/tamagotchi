@@ -79,7 +79,6 @@ namespace Tama.Models
 
         public static List<Tamagotchi> GetAll()
         {
-            Console.WriteLine("1");
             return _instances;
         }
 
@@ -95,14 +94,17 @@ namespace Tama.Models
             return null;
         }
 
-        public void FeedTama()
+        public static void FeedTama()
         {
-            if (_food <=79)
+            foreach (Tamagotchi tama in _instances)
             {
-                _food += 20;
-            } else
-            {
-                _food = 100;
+                if (tama.GetFood() <=79)
+                {
+                    tama.SetFood(tama.GetFood() + 20);
+                } else
+                {
+                    tama.SetFood(100);
+                }
             }
         }
 
@@ -117,28 +119,29 @@ namespace Tama.Models
             }
         }
 
-        public void TamaRest()
+        public static void TamaRest()
         {
-            _rest = 100;
+            foreach (Tamagotchi tama in _instances)
+            {
+                tama.SetRest(100);
+            }
         }
 
         public static void TimePass()
         {
-            // List<Tamagotchi> NewDeadTamagotchi = new List<Tamagotchi>();
             foreach (Tamagotchi tama in _instances)
             {
-                tama.SetFood(tama.GetFood() - 10);
-                tama.SetAttention(tama.GetAttention() - 10);
-                tama.SetRest(tama.GetRest() - 10);
-                if (tama.GetFood() <=0 || tama.GetAttention() <=0 || tama.GetRest() <=0)
-                {
-                    if (tama.GetAlive())
-                    {
-                        tama.Death();
-                    }
-                }
+                  if (tama.GetAlive())
+                  {
+                      tama.SetFood(tama.GetFood() - 10);
+                      tama.SetAttention(tama.GetAttention() - 10);
+                      tama.SetRest(tama.GetRest() - 10);
+                      if (tama.GetFood() <=0 || tama.GetAttention() <=0 || tama.GetRest() <=0)
+                      {
+                          tama.Death();
+                      }
+                  }
             }
-            // return NewDeadTamagotchi;
         }
     }
 }
